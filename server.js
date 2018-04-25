@@ -5,12 +5,13 @@ const fs = require('fs');
 const port = process.env.PORT || 3000;
 var app = express();
 
-var pTitle = 'Spacely Space  Sprockets, Inc.';
+var pTitle = 'Spacely Space Sprockets, Inc.';
 
 hbs.registerPartials(__dirname + '/views/partials');
 app.set('view engine', 'hbs');
 //middleware
 
+// server log
 app.use((req, res, next) =>{
   var now = new Date().toString();
   var log = `${now}: ${req.method} ${req.url}`;
@@ -41,7 +42,6 @@ hbs.registerHelper('screamIt', (text) => {
 });
 
 app.get('/', (req, res) => {
-  // res.send('<h1>Hello Express!</h1>');
   res.render('home.hbs', {
     pageTitle: pTitle,
     welcomeMessage: 'Welcome to our new website',
@@ -51,11 +51,17 @@ app.get('/', (req, res) => {
 });
 
 app.get('/about', (req, res) => {
-  // res.send('About Page');
   res.render('about.hbs', {
     pageTitle: pTitle
   });
 });
+
+app.get('/projects', (req, res) => {
+  res.render('projects.hbs', {
+    pageTitle: pTitle
+  });
+});
+
 
 app.get('/bad', (req, res) => {
   res.send({
